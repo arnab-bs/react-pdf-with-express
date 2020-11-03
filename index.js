@@ -35,42 +35,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var bodyParser = require('body-parser');
-var React = require('react');
-var test_1 = __importDefault(require("./test"));
 var dotenv = require('dotenv');
 var morgan = require('morgan');
-var renderer_1 = require("@react-pdf/renderer");
+var fs = require('fs');
+var path = require('path');
+var ejs = require('ejs');
+var pdf = require('html-pdf');
 dotenv.config();
 var app = express();
+app.use(bodyParser.json());
 app.use(morgan('dev'));
 var port = process.env.PORT || 5000;
-app.use('/api', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var template, template2, blobPDF, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+app.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, map, building, road, total, data, filePathName, htmlString, options, ejsData, err_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                template = React.createElement(renderer_1.Document, { title: 'mypfs' }, null);
-                template2 = React.createElement(test_1.default, null, null);
-                _a.label = 1;
+                _a = req.body, map = _a.map, building = _a.building, road = _a.road, total = _a.total;
+                data = {
+                    font: {
+                        color: 'green',
+                        include: 'https://api.****.com/parser/v3/css/combined?face=Kruti%20Dev%20010,Calibri,DevLys%20010,Arial,Times%20New%20Roman',
+                    },
+                    map: map,
+                    building: building,
+                    road: road,
+                    total: total,
+                };
+                _b.label = 1;
             case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, renderer_1.pdf(template)];
+                _b.trys.push([1, 3, , 4]);
+                filePathName = path.resolve(__dirname, 'htmltopdf.ejs');
+                htmlString = fs.readFileSync(filePathName).toString();
+                options = { format: 'A4' };
+                ejsData = ejs.render(htmlString, data);
+                return [4 /*yield*/, pdf.create(ejsData, options).toFile('generatedfile.pdf', function (err, response) {
+                        if (err)
+                            return console.log(err);
+                        console.log(response, '11111111');
+                    })];
             case 2:
-                blobPDF = _a.sent();
-                // let data = await blobPDF.toBlob();
-                console.log(blobPDF, 'blobPDF');
+                _b.sent();
                 return [3 /*break*/, 4];
             case 3:
-                error_1 = _a.sent();
-                console.log(error_1, 'error');
+                err_1 = _b.sent();
+                console.log('Error processing request: ' + err_1);
                 return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+            case 4:
+                res.json('asdasd');
+                return [2 /*return*/];
         }
     });
 }); });
