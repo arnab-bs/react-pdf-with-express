@@ -1,0 +1,132 @@
+<%- include('./partials/header.ejs') -%>
+<div class="page">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 p0"><%- include('./partials/page-header.ejs',{pdf_name: "Subsidence"}) -%></div>
+
+			<div class="col-12">
+				<p class="section-title m0">General Information</p>
+
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Area</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">Kansai Airport</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Country</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">Japan</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Size</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">10.47 km<sup>2</sup> (3.6 sq mi)</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+			</div>
+			<div class="col-12">
+				<div class="devider"></div>
+			</div>
+			<div class="col-12">
+				<p class="section-title m0">Descending Data</p>
+				<img class="map-image" style="height: 250px;max-width: 100%"
+					src="https://cdn.theatlantic.com/thumbor/Rts5IYXuEPXtdBUPY7BvaJ0CTKI=/0x36:1460x857/720x405/filters:format(png)/media/img/mt/2016/06/Screen_Shot_2016_06_27_at_12.59.14_PM/original.png" />
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Date</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">April 16,2019 - April 16,2020</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Max. Subsidence</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">- 0.34 cm</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Min. Subsidence</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">- 0.34 cm</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Avg. Display Rate</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">- 1.22 cm/year</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-4 p0">
+						<p class="m0 gi-label">Total PS Point</p>
+					</div>
+					<div class="col-8">
+						<p class="m0 gi-info">30.214 points</p>
+					</div>
+				</div>
+
+			</div>
+			<div class="page-breaker"></div>
+
+			<div class="col-12 p0"><%- include('./partials/page-header.ejs',{pdf_name: "Subsidence"}) -%></div>
+
+
+
+
+			<div class="col-12" style="margin-bottom: 20px"> <% for(var i=0; i < 3; i++) { %>
+				<%- include('./partials/piechart.ejs', {chart_id: 'chart_'+i}) -%> <% } %> </div>
+
+			<div class="page-breaker"></div>
+
+			<div class="col-12 p0"><%- include('./partials/page-header.ejs',{pdf_name: "Subsidence"}) -%></div>
+			<div class="col-12 p0">
+				<div class="col-12">
+					<p class="section-title m0">PS point data</p>
+					<img class="map-image" style="height: 250px;max-width: 100%"
+						src="https://cdn.theatlantic.com/thumbor/Rts5IYXuEPXtdBUPY7BvaJ0CTKI=/0x36:1460x857/720x405/filters:format(png)/media/img/mt/2016/06/Screen_Shot_2016_06_27_at_12.59.14_PM/original.png" />
+				</div>
+				<div class="col-12" style="margin-bottom: 20px"> <% for(var i=0; i < 2; i++) { %>
+					<%- include('./partials/piechart.ejs', {chart_id: 'ps_point_'+i}) -%> <% } %> </div>
+
+				<div class="clear"></div>
+			</div>
+
+
+			<div class="page-breaker"></div>
+
+			<div class="col-12 p0"><%- include('./partials/page-header.ejs',{pdf_name: "Subsidence"}) -%></div>
+			<div class="col-12 p0">
+				<div class="col-12">
+					<p class="section-title m0">AOI Polygon data</p>
+					<p class="section-title m0">Area 1</p>
+					<img class="map-image" style="height: 250px;max-width: 100%"
+						src="https://cdn.theatlantic.com/thumbor/Rts5IYXuEPXtdBUPY7BvaJ0CTKI=/0x36:1460x857/720x405/filters:format(png)/media/img/mt/2016/06/Screen_Shot_2016_06_27_at_12.59.14_PM/original.png" />
+
+				</div>
+				<div class="col-12" style="margin-bottom: 20px"> <% for(var i=0; i < 2; i++) { %>
+					<%- include('./partials/piechart.ejs', {chart_id: 'aoi_polygon_'+i}) -%> <% } %> </div>
+
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<%- include('./partials/footer.ejs') -%>

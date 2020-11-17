@@ -48,8 +48,11 @@ var app = express();
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 var port = process.env.PORT || 5000;
-app.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, map, building, road, total, data, filePathName, htmlString, options, ejsData, err_1;
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.resolve(__dirname, './')));
+app.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, map, building, road, total, data, filePathName, options, ejsData, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -66,26 +69,28 @@ app.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, fun
                 };
                 _b.label = 1;
             case 1:
-                _b.trys.push([1, 3, , 4]);
-                filePathName = path.resolve(__dirname, 'htmltopdf.ejs');
-                htmlString = fs.readFileSync(filePathName).toString();
+                _b.trys.push([1, 4, , 5]);
+                filePathName = path.resolve(__dirname, './views/flood.ejs');
                 options = { format: 'A4' };
-                ejsData = ejs.render(htmlString, data);
+                return [4 /*yield*/, ejs.renderFile(filePathName, data)];
+            case 2:
+                ejsData = (_b.sent()).toString();
+                // const htmlString = fs.readFileSync(filePathName).toString();
                 return [4 /*yield*/, pdf.create(ejsData, options).toFile('generatedfile.pdf', function (err, response) {
                         if (err)
                             return console.log(err);
                         console.log(response, '11111111');
                     })];
-            case 2:
-                _b.sent();
-                return [3 /*break*/, 4];
             case 3:
+                // const htmlString = fs.readFileSync(filePathName).toString();
+                _b.sent();
+                res.render(filePathName, data);
+                return [3 /*break*/, 5];
+            case 4:
                 err_1 = _b.sent();
                 console.log('Error processing request: ' + err_1);
-                return [3 /*break*/, 4];
-            case 4:
-                res.json('asdasd');
-                return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); });
